@@ -1,0 +1,21 @@
+- var textVal = ['D', 'N', 'A', 'F', 'S'];
+- var n = 0;
+<!DOCTYPE html>
+html(lang="en")
+  head
+    meta(charset="UTF-8")
+    meta(name="viewport", content="width=device-width, initial-scale=1.0")
+    title Document
+    link(rel="stylesheet", href="./style-s.css")
+  body
+    .container
+      .dna-wrap
+        .dna-txt
+          each val in textVal
+            span.txt-anim= val
+        .dna-circle-wrap
+          each val in [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15]
+            .dna-circle-row
+              .circle
+              .circle
+              

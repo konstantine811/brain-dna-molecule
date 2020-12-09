@@ -1,0 +1,137 @@
+$circle-row--width: 100px;
+$circle--width: 7px;
+$circle-count: 15;
+$txt-count: 5;
+
+body,
+html {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  width: 100%;
+}
+
+.container {
+  width: 100%;
+  height: 100%;
+  background-color: slateblue;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.dna-txt {
+  color: white;
+  font-size: 52px;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  overflow: hidden;
+}
+
+.txt-anim {
+  display: inline-block;
+}
+
+.dna-txt {
+  .txt-anim {
+    opacity: 0;
+    transform: translateY(100px);
+    animation-name: anim-translate-bottom;
+    animation-fill-mode: forwards;
+    animation-duration: 1.4s;
+    animation-timing-function: ease;
+    animation-iteration-count: 1;
+    @for $child from 1 through $txt-count {
+      &:nth-child(#{$child}) {
+        animation-delay: #{$child / 10}s;
+      }
+    }
+  }
+}
+
+.dna-circle-wrap {
+  transform: rotate(45deg);
+  margin-top: 50px;
+  overflow: hidden;
+}
+
+.dna-circle-row {
+  width: $circle-row--width;
+  height: 20px;
+  position: relative;
+  animation: anim-translate-bottom-2 1.5s ease forwards 1;
+}
+
+.circle {
+  width: $circle--width;
+  height: $circle--width;
+  border-radius: 50%;
+  position: absolute;
+}
+
+.dna-circle-row {
+  .circle {
+    animation-delay: 0.1s;
+    &:nth-child(1) {
+      background-color: red;
+      animation: anim-translate-to-right 1.6s ease-in-out forwards infinite;
+    }
+    &:nth-child(2) {
+      background-color: white;
+      right: 0;
+      animation: anim-translate-to-left 1.6s ease-in-out forwards infinite;
+    }
+  }
+}
+
+@for $i from 1 through $circle-count {
+  .dna-circle-row:nth-child(#{$i}) .circle:nth-child(1),
+  .dna-circle-row:nth-child(#{$i}) .circle:nth-child(2) {
+    animation-delay: #{$i / 10}s;
+  }
+}
+
+@keyframes anim-translate-bottom {
+  from {
+    transform: translateY(100px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes anim-translate-bottom-2 {
+  0% {
+    transform: translateY(1300px);
+    opacity: 0;
+  }
+  30% {
+    transform: translateY(100px);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes anim-translate-to-right {
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+  50% {
+    transform: translateX(#{$circle-row--width - $circle--width});
+  }
+}
+
+@keyframes anim-translate-to-left {
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+  50% {
+    transform: translateX(#{$circle--width - $circle-row--width});
+  }
+}
